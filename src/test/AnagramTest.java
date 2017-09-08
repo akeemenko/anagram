@@ -2,6 +2,7 @@ package test;
 
 
 import main.Anagram;
+import main.DifferentLengthException;
 import org.junit.Test;
 import org.testng.Assert;
 
@@ -28,7 +29,7 @@ public class AnagramTest {
     private String s7 = "elvis";
     private String s8 = "";
 
-    private String s9 = "elwis";
+    private String s9 = "elWis";
     private String s10 = "lives";
 
 
@@ -59,10 +60,9 @@ public class AnagramTest {
         Assert.assertEquals(true, result);
     }
 
-    @Test
+    @Test(expected = DifferentLengthException.class)
     public void testAnagramWithEmptyString() throws Exception {
         boolean result = anagram.isAnagram(s7, s8);
-        Assert.assertEquals(false, result);
     }
 
     @Test
@@ -71,16 +71,15 @@ public class AnagramTest {
         Assert.assertEquals(false, result);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testAnagramWithNull() throws Exception {
         boolean result = anagram.isAnagram(s11, s12);
         Assert.assertEquals(false, result);
     }
 
-    @Test
-    public void testAnagramWithDifferentLength() throws Exception {
-        boolean result = anagram.isAnagram(s13, s14);
-        Assert.assertEquals(false, result);
-    }
 
+    @Test(expected = DifferentLengthException.class)
+    public void testAnagramWithDifferentLength() throws Exception, DifferentLengthException {
+        boolean result = anagram.isAnagram(s13, s14);
+    }
 }

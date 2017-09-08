@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Anagram {
 
 
-    public static boolean isAnagram(String s1, String s2) {
+    public static boolean isAnagram(String s1, String s2) throws DifferentLengthException, NullPointerException {
 
         boolean b = true;
         String s1Clean = s1.replaceAll(" ", "");
@@ -13,7 +13,9 @@ public class Anagram {
 
         if (s1Clean.length() != s2Clean.length()) {
             b = false;
-        } else {
+            throw new DifferentLengthException(String.format("Strings %s and %s are different length", s1Clean, s2Clean));
+        }
+         else {
             char[] s1Array = s1Clean.toLowerCase().toCharArray();
             char[] s2Array = s2Clean.toLowerCase().toCharArray();
             Arrays.sort(s1Array);
