@@ -10,49 +10,41 @@ import org.testng.Assert;
 import static org.junit.Assert.*;
 
 
-
 public class AnagramTest {
-
-    private Anagram anagram;
-
 
     @Test
     public void testAnagramSimpleExample() throws Exception {
-       boolean result = anagram.isAnagram("elvis", "lives");
-        Assert.assertEquals(true, result);
+        Assert.assertTrue(Anagram.isAnagram("elvis", "lives"));
     }
 
     @Test
     public void testAnagramLowerCase() throws Exception {
-        boolean result = anagram.isAnagram("Elvis", "liveS");
-        Assert.assertEquals(true, result);
+        Assert.assertTrue(Anagram.isAnagram("Elvis", "liveS"));
     }
 
     @Test
     public void testAnagramWithSpace() throws Exception {
-        boolean result = anagram.isAnagram("el vis", "lives ");
-        Assert.assertEquals(true, result);
+        Assert.assertTrue(Anagram.isAnagram("el vis", "lives "));
     }
 
     @Test(expected = DifferentLengthException.class)
     public void testAnagramWithEmptyString() throws Exception {
-        boolean result = anagram.isAnagram("elvis", "");
+        Anagram.isAnagram("elvis", "");
     }
 
     @Test
     public void testAnagramWithAnotherChar() throws Exception {
-        boolean result = anagram.isAnagram("elWis", "lives");
-        Assert.assertEquals(false, result);
+        Assert.assertFalse(Anagram.isAnagram("elWis", "lives"));
     }
 
     @Test(expected = InvalidWordException.class)
     public void testAnagramWithNull() throws Exception {
-        boolean result = anagram.isAnagram("elvis", null);
+        Anagram.isAnagram("elvis", null);
     }
 
 
     @Test(expected = DifferentLengthException.class)
     public void testAnagramWithDifferentLength() throws Exception, DifferentLengthException {
-        boolean result = anagram.isAnagram("elvis123", "elvis");
+        Anagram.isAnagram("elvis123", "elvis");
     }
 }
